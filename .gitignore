@@ -1,0 +1,34 @@
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Environment variables
+.env
+.env.*
+
+# Database
+*.db
+
+# Private keys
+*.pem
+*.key
+
+# Videos
+*.mp4
+
+# React build
+frontend/build/
+
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Generated data
+ML/assessments/
+ML/daily_questions/
+ML/recordings/

@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-size: 16px;
+  --background: #f7f9fc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5fb;
+  --secondary-foreground: #334155;
+  --muted: #f1f5fb;
+  --muted-foreground: #64748b;
+  --accent: #ede9fe;
+  --accent-foreground: #5b21b6;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(99, 130, 246, 0.13);
+  --input: rgba(99, 130, 246, 0.08);
+  --input-background: #f1f5fb;
+  --switch-background: #cbd5e1;
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --ring: #3b82f6;
+  --radius: 0.875rem;
+}
+
+/* Scoped Landing Page specific overrides to prevent design bleeding */
+.landing-page-root {
+  font-family: 'Outfit', sans-serif !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  min-height: 100vh;
+}
+
+.landing-page-root h1, 
+.landing-page-root h2, 
+.landing-page-root h3, 
+.landing-page-root h4 {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+/* Animations defined inline in the landing page project */
+@keyframes float { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-16px)} }
+@keyframes floatSlow { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+@keyframes floatAlt { 0%,100%{transform:translateY(-8px)} 50%{transform:translateY(8px)} }
+@keyframes nodePulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+@keyframes edgePulse { 0%,100%{opacity:0.15} 50%{opacity:0.45} }
+@keyframes aurora { 0%,100%{transform:scale(1) rotate(0deg);opacity:0.55} 33%{transform:scale(1.12) rotate(120deg);opacity:0.75} 66%{transform:scale(0.93) rotate(240deg);opacity:0.6} }
+@keyframes slideUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes barRise { from{transform:scaleY(0);transform-origin:bottom} to{transform:scaleY(1)} }
+@keyframes pulseRing { 0%{transform:scale(1);opacity:0.7} 70%{transform:scale(1.7);opacity:0} 100%{transform:scale(1.7);opacity:0} }
+@keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+@keyframes glowPulse { 0%,100%{box-shadow:0 0 30px rgba(59,130,246,0.25),0 0 60px rgba(139,92,246,0.1)} 50%{box-shadow:0 0 50px rgba(59,130,246,0.4),0 0 100px rgba(139,92,246,0.2)} }
+@keyframes iconBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes fadeSlideIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
+
+.landing-page-root .hero-animate         { animation: slideUp 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+.landing-page-root .hero-animate-d1      { animation-delay: 0.08s; }
+.landing-page-root .hero-animate-d2      { animation-delay: 0.22s; }
+.landing-page-root .hero-animate-d3      { animation-delay: 0.38s; }
+.landing-page-root .hero-animate-d4      { animation-delay: 0.52s; }
+.landing-page-root .scroll-hide::-webkit-scrollbar { display:none; }
+.landing-page-root .scroll-hide          { -ms-overflow-style:none; scrollbar-width:none; }
+
+.landing-page-root .glow-text {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 55%, #0891b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.landing-page-root .grad-border {
+  position: relative;
+}
+.landing-page-root .grad-border::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(59,130,246,0.35), rgba(139,92,246,0.25), rgba(6,182,212,0.3));
+  z-index: -1;
+}
+.landing-page-root .highlight-card:hover .highlight-icon {
+  animation: iconBounce 0.6s ease;
+}
+.landing-page-root a {
+  text-decoration: none;
+}

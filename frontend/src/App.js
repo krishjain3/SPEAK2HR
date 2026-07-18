@@ -7,6 +7,7 @@ import { CircularProgress, Box } from '@mui/material';
 const Layout = lazy(() => import('./components/Layout/Layout'));
 
 // Auth Pages
+const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const Register = lazy(() => import('./pages/Auth/Register'));
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'));
@@ -91,7 +92,7 @@ function App() {
       </Box>
     }>
       <Routes>
-        <Route path="/" element={<RoleBasedRedirect />} />
+        <Route path="/" element={<Home />} />
 
         {/* Public Routes */}
         <Route path="/login" element={isAuthenticated ? <RoleBasedRedirect /> : <Login />} />

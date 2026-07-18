@@ -32,3 +32,16 @@ frontend/node_modules/
 ML/assessments/
 ML/daily_questions/
 ML/recordings/
+
+# Generated folders
+ML/reports/
+ML/profiles/
+ML/temp_files/
+ML/videos/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

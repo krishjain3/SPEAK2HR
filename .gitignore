@@ -1,47 +1,72 @@
-# Node
+# =========================
+# Node / React
+# =========================
 node_modules/
+frontend/node_modules/
+frontend/build/
+frontend/dist/
 
+# =========================
 # Python
+# =========================
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
 venv/
 .venv/
+ML/venv/
+ML/__pycache__/
+*.egg-info/
+.pytest_cache/
 
-# Environment variables
+# =========================
+# Environment Variables
+# =========================
 .env
 .env.*
 
+# =========================
 # Database
+# =========================
 *.db
 
-# Private keys
+# =========================
+# Private Keys & Secrets
+# =========================
 *.pem
 *.key
 
-# Videos
-*.mp4
-
-# React build
-frontend/build/
-
-# Node modules
-node_modules/
-frontend/node_modules/
-
-# Generated data
+# =========================
+# Generated Data
+# =========================
 ML/assessments/
 ML/daily_questions/
 ML/recordings/
-
-# Generated folders
 ML/reports/
 ML/profiles/
 ML/temp_files/
 ML/videos/
 
-# OS files
+# =========================
+# Media Files
+# =========================
+*.mp4
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# IDE
+# =========================
+.vscode/
+
+# =========================
+# OS Files
+# =========================
 .DS_Store
 Thumbs.db
-
-# Logs
-*.log
+.AppleDouble
+.LSOverride

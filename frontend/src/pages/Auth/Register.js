@@ -100,17 +100,7 @@ function Register() {
       navigate(user.role === 'hr' ? '/hr/dashboard' : '/candidate/dashboard');
     } catch (err) {
       const errorMessage = err.response?.data?.detail || err.response?.data?.message || 'Registration failed. Please try again.';
-
-      // If it's an HR pending approval message, show as success
-      if (errorMessage.includes('pending admin approval')) {
-        setSuccessMessage(errorMessage);
-        // Redirect to login after 3 seconds
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
-      } else {
-        setError(errorMessage);
-      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

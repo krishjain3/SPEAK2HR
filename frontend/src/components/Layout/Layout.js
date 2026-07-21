@@ -60,7 +60,6 @@ const hrMenuItems = [
 
 const adminMenuItems = [
   { text: 'Dashboard', icon: <Dashboard />, path: '/admin/dashboard' },
-  { text: 'HR Approvals', icon: <CheckCircle />, path: '/admin/hr-approval' },
   { text: 'User Management', icon: <SupervisorAccount />, path: '/admin/users' },
   { text: 'Settings', icon: <SettingsIcon />, path: '/admin/settings' },
 ];
@@ -133,13 +132,19 @@ function Layout({ userType }) {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   const drawer = (
     <Box>
       <Toolbar sx={{ px: 2 }}>
-        <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700, color: 'primary.main' }}>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          onClick={() => navigate('/')}
+          sx={{ fontWeight: 700, color: 'primary.main', cursor: 'pointer' }}
+        >
           Speak2HR
         </Typography>
       </Toolbar>

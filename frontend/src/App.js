@@ -31,7 +31,6 @@ const VideoCall = lazy(() => import('./pages/VideoCall'));
 
 // Admin Pages
 const AdminDashboard = lazy(() => import('./pages/Admin/Dashboard'));
-const HRApproval = lazy(() => import('./pages/Admin/HRApproval'));
 const UserManagement = lazy(() => import('./pages/Admin/UserManagement'));
 const Settings = lazy(() => import('./pages/Admin/Settings'));
 
@@ -39,13 +38,13 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { isAuthenticated, user, logout } = useAuthStore();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // Handle corrupted local storage state
   if (!user || !user.role) {
     logout();
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
@@ -56,7 +55,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
     // Safety fallback
     logout();
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children ? children : <Outlet />;
@@ -66,12 +65,12 @@ const RoleBasedRedirect = () => {
   const { isAuthenticated, user, logout } = useAuthStore();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (!user || !user.role) {
     logout();
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (user.role === 'admin') return <Navigate to="/admin/dashboard" replace />;
@@ -79,7 +78,7 @@ const RoleBasedRedirect = () => {
   if (user.role === 'candidate') return <Navigate to="/candidate/dashboard" replace />;
 
   logout();
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/" replace />;
 };
 
 function App() {
@@ -146,7 +145,6 @@ function App() {
         >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="hr-approval" element={<HRApproval />} />
           <Route path="users" element={<UserManagement />} />
           <Route path="settings" element={<Settings />} />
         </Route>

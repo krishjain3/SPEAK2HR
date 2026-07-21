@@ -106,16 +106,6 @@ function AdminDashboard() {
 
         <Grid item xs={12} sm={6} md={4}>
           <StatCard
-            title="Pending HR Approvals"
-            value={stats.pendingHRApprovals}
-            icon={<PendingActions />}
-            color="warning"
-            subtitle="Requires action"
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4}>
-          <StatCard
             title="HR Users"
             value={stats.totalHRUsers}
             icon={<Business />}
@@ -161,14 +151,6 @@ function AdminDashboard() {
                 Quick Actions
               </Typography>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
-                {stats.pendingHRApprovals > 0 && (
-                  <Chip
-                    label={`${stats.pendingHRApprovals} HR Approvals Pending`}
-                    color="warning"
-                    icon={<PendingActions />}
-                    sx={{ fontSize: '0.9rem', py: 2.5 }}
-                  />
-                )}
                 {stats.pendingEvaluations > 0 && (
                   <Chip
                     label={`${stats.pendingEvaluations} Evaluations Pending`}
@@ -195,7 +177,7 @@ function AdminDashboard() {
                 System Information
               </Typography>
               <Grid container spacing={2} sx={{ mt: 1 }}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                     <Typography variant="body2" color="text.secondary">
                       Active Users
@@ -207,28 +189,6 @@ function AdminDashboard() {
                   <LinearProgress
                     variant="determinate"
                     value={(stats.activeUsers / stats.totalUsers) * 100}
-                    sx={{ height: 8, borderRadius: 1 }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2" color="text.secondary">
-                      HR Approval Rate
-                    </Typography>
-                    <Typography variant="body2" fontWeight="bold">
-                      {stats.totalHRUsers > 0
-                        ? Math.round(((stats.totalHRUsers - stats.pendingHRApprovals) / stats.totalHRUsers) * 100)
-                        : 0}%
-                    </Typography>
-                  </Box>
-                  <LinearProgress
-                    variant="determinate"
-                    value={
-                      stats.totalHRUsers > 0
-                        ? ((stats.totalHRUsers - stats.pendingHRApprovals) / stats.totalHRUsers) * 100
-                        : 0
-                    }
-                    color="success"
                     sx={{ height: 8, borderRadius: 1 }}
                   />
                 </Grid>

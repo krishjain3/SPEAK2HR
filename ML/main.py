@@ -1865,9 +1865,9 @@ async def register_user(request: RegisterRequest):
             raise HTTPException(status_code=400, detail="Email already registered")
         
         user_id = str(uuid.uuid4())
-        status = 'pending' if request.role == 'hr' else 'active'
+        status = 'active'
         registered_date = datetime.now(timezone.utc).isoformat()
-        last_login = registered_date if status == 'active' else None
+        last_login = registered_date
         
         cursor.execute('''
             INSERT INTO users (id, name, email, password, role, target_role, skills, experience_years, status, registered_date, last_login)
@@ -1876,9 +1876,6 @@ async def register_user(request: RegisterRequest):
               json.dumps(request.skills) if request.skills else '[]', request.experienceYears, status, registered_date, last_login))
         
         conn.commit()
-        
-        if request.role == 'hr':
-            raise HTTPException(status_code=400, detail="Registration successful! Your HR account is pending admin approval.")
             
         return {
             "user": {
@@ -1909,12 +1906,7 @@ async def login_user(request: LoginRequest):
         if not user:
             raise HTTPException(status_code=401, detail="Invalid email or password")
             
-        if user['role'] == 'hr':
-            if user['status'] == 'pending':
-                raise HTTPException(status_code=403, detail="Your HR account is pending approval.")
-            if user['status'] == 'rejected':
-                raise HTTPException(status_code=403, detail="Your HR account has been rejected.")
-                
+
         # Update last login
         cursor.execute("UPDATE users SET last_login=? WHERE id=?", (datetime.now(timezone.utc).isoformat(), user['id']))
         conn.commit()
@@ -3077,47 +3069,7 @@ async def delete_user(user_id: str):
         logger.error(f"Error deleting user: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/admin/hr-pending")
-async def get_pending_hr_requests():
-    """Get pending HR approval requests (admin only)"""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, name, email, status, registered_date FROM users WHERE role = 'hr' AND status = 'pending'")
-        users = cursor.fetchall()
-        conn.close()
-        return [dict(u) for u in users]
-    except Exception as e:
-        logger.error(f"Error fetching pending HR requests: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/api/admin/hr-approve/{user_id}")
-async def approve_hr_user(user_id: str):
-    """Approve an HR user (admin only)"""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("UPDATE users SET status = 'approved' WHERE id = ?", (user_id,))
-        conn.commit()
-        conn.close()
-        return {"success": True, "id": user_id}
-    except Exception as e:
-        logger.error(f"Error approving HR user: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/api/admin/hr-reject/{user_id}")
-async def reject_hr_user(user_id: str):
-    """Reject an HR user (admin only)"""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("UPDATE users SET status = 'rejected' WHERE id = ?", (user_id,))
-        conn.commit()
-        conn.close()
-        return {"success": True, "id": user_id}
-    except Exception as e:
-        logger.error(f"Error rejecting HR user: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/admin/stats")
 async def get_system_stats():
@@ -3138,8 +3090,7 @@ async def get_system_stats():
         cursor.execute("SELECT COUNT(*) as c FROM users WHERE role = 'hr'")
         total_hr = cursor.fetchone()["c"]
         
-        cursor.execute("SELECT COUNT(*) as c FROM users WHERE role = 'hr' AND status = 'pending'")
-        pending_hr = cursor.fetchone()["c"]
+        pending_hr = 0
         
         cursor.execute("SELECT COUNT(*) as c FROM evaluations")
         total_interviews = cursor.fetchone()["c"]
@@ -3390,7 +3341,6 @@ async def get_system_settings():
         return {
             "siteName": "Speak2HR",
             "allowRegistration": True,
-            "hrAutoApproval": False,
             "emailNotifications": True,
             "maintenanceMode": False,
             "maxInterviewDuration": 60,

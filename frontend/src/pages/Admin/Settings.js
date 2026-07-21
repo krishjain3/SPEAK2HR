@@ -27,7 +27,6 @@ function Settings() {
   const [settings, setSettings] = useState({
     siteName: 'Speak2HR',
     allowRegistration: true,
-    hrAutoApproval: false,
     emailNotifications: true,
     maintenanceMode: false,
     maxInterviewDuration: 60,
@@ -141,35 +140,6 @@ function Settings() {
                 />
                 <Typography variant="caption" display="block" color="text.secondary" sx={{ ml: 4 }}>
                   Disable the system for maintenance
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Card sx={{ boxShadow: 3, height: '100%' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                <Security sx={{ mr: 1, color: 'primary.main' }} />
-                <Typography variant="h6" fontWeight="bold">
-                  HR Management
-                </Typography>
-              </Box>
-              <Divider sx={{ mb: 3 }} />
-
-              <Box sx={{ mb: 3 }}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={settings.hrAutoApproval}
-                      onChange={(e) => handleChange('hrAutoApproval', e.target.checked)}
-                    />
-                  }
-                  label="Auto-approve HR Registrations"
-                />
-                <Typography variant="caption" display="block" color="text.secondary" sx={{ ml: 4 }}>
-                  Automatically approve HR user registrations without manual review
                 </Typography>
               </Box>
             </CardContent>

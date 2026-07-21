@@ -130,7 +130,7 @@ function HRDashboard() {
       setUpcomingInterviews(bookedSlots);
 
       // Load HR profile details from database
-      const hrListResponse = await axios.get('http://localhost:8000/api/hrs');
+      const hrListResponse = await axios.get('https://speak2hr-backend.onrender.com/api/hrs');
       const matchedHr = hrListResponse.data.find(h => h.email === user?.email || h.id === user?.id);
       
       if (matchedHr) {
@@ -203,7 +203,7 @@ function HRDashboard() {
         avatar: profileForm.avatar,
       };
 
-      await axios.put(`http://localhost:8000/api/hr/profile/${profileForm.id || user?.id}`, payload);
+     await axios.put(`https://speak2hr-backend.onrender.com/api/hr/profile/${profileForm.id || user?.id}`, payload);
       setSuccessMsg('Profile updated successfully!');
       fetchDashboardData();
     } catch (err) {
@@ -213,7 +213,7 @@ function HRDashboard() {
 
   const handleSlotStatusUpdate = async (slotId, newStatus) => {
     try {
-      await axios.put(`http://localhost:8000/api/slots/${slotId}`, { status: newStatus });
+      await axios.put(`https://speak2hr-backend.onrender.com/api/slots/${slotId}`, { status: newStatus });
       setSuccessMsg(`Slot marked as ${newStatus}`);
       fetchDashboardData();
     } catch (err) {

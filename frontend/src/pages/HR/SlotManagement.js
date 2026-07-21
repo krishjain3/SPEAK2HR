@@ -206,10 +206,10 @@ function SlotManagement() {
 
     try {
       if (editingSlot) {
-        await axios.put(`http://localhost:8000/api/slots/${editingSlot.id}`, payload);
+        await axios.put(`https://speak2hr-backend.onrender.com/api/slots/${editingSlot.id}`, payload);
         setSuccess('Slot updated successfully');
       } else {
-        await axios.post('http://localhost:8000/api/slots', payload);
+        await axios.post('https://speak2hr-backend.onrender.com/api/slots', payload);
         setSuccess('Slot created successfully');
       }
       setDialogOpen(false);
@@ -222,7 +222,7 @@ function SlotManagement() {
 
   const handleMarkCompleted = async (slotId) => {
     try {
-      await axios.put(`http://localhost:8000/api/slots/${slotId}`, { status: 'completed' });
+      await axios.put(`https://speak2hr-backend.onrender.com/api/slots/${slotId}`, { status: 'completed' });
       setSuccess('Round marked as Completed.');
       fetchSlots();
     } catch (err) {
@@ -232,7 +232,7 @@ function SlotManagement() {
 
   const handleMarkMissed = async (slotId) => {
     try {
-      await axios.put(`http://localhost:8000/api/slots/${slotId}`, { status: 'missed' });
+      await axios.put(`https://speak2hr-backend.onrender.com/api/slots/${slotId}`, { status: 'missed' });
       setSuccess('Round marked as Missed.');
       fetchSlots();
     } catch (err) {

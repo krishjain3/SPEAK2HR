@@ -76,7 +76,7 @@ function HRInterviewBooking() {
       setSlots(response.data);
 
       // Load HR Recruiters
-      const hrResponse = await axios.get('http://localhost:8000/api/hrs');
+      const hrResponse = await axios.get('https://speak2hr-backend.onrender.com/api/hrs');
       setHrs(hrResponse.data || []);
 
       // Get user's bookings

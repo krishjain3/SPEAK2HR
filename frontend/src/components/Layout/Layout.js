@@ -86,7 +86,7 @@ function Layout({ userType }) {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/notifications/${user.id}`);
+      const response = await axios.get(`https://speak2hr-backend.onrender.com/api/notifications/${user.id}`);
       setNotifications(response.data || []);
     } catch (err) {
       console.error('Failed to fetch notifications:', err);
@@ -124,7 +124,7 @@ function Layout({ userType }) {
 
   const handleMarkAsRead = async (notiId) => {
     try {
-      await axios.post(`http://localhost:8000/api/notifications/read/${notiId}`);
+      await axios.post(`https://speak2hr-backend.onrender.com/api/notifications/read/${notiId}`);
       fetchNotifications();
     } catch (err) {
       console.error('Failed to mark read:', err);

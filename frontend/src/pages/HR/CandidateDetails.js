@@ -82,7 +82,7 @@ function CandidateDetails() {
   const handleUpdateStatus = async (newStatus) => {
     try {
       setSaving(true);
-      await axios.put(`http://localhost:8000/api/candidates/${id}/status`, { status: newStatus });
+      await axios.put(`https://speak2hr-backend.onrender.com/api/candidates/${id}/status`, { status: newStatus });
       setSuccess(`Candidate status updated to ${newStatus.toUpperCase()}`);
       fetchCandidate();
       setTimeout(() => setSuccess(''), 3000);

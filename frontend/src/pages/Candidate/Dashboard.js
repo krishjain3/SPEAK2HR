@@ -128,7 +128,7 @@ function CandidateDashboard() {
 
   const fetchHrs = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/hrs');
+     const response = await axios.get('https://speak2hr-backend.onrender.com/api/hrs');
       setHrs(response.data.slice(0, 3) || []); // Limit to 3 for quick dashboard listing
     } catch (err) {
       console.error('Failed to load HRs:', err);
